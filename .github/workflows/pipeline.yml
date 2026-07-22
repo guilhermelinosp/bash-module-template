@@ -1,0 +1,9 @@
+name: pipeline
+on: { push: { branches: [main] } }
+permissions: write-all
+jobs:
+  release:
+    uses: guilhermelinosp/ci-templates/.github/workflows/release.yml@main
+    secrets: inherit
+  lint:
+    uses: guilhermelinosp/ci-templates/.github/workflows/shellcheck.yml@main
