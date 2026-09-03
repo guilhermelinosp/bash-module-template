@@ -1,9 +1,20 @@
 name: pipeline
-on: { push: { branches: [main] } }
-permissions: write-all
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '.github/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
 jobs:
   release:
-    uses: guilhermelinosp/templates/.github/workflows/release.yml@main
-    secrets: inherit
-  lint:
-    uses: guilhermelinosp/templates/.github/workflows/shellcheck.yml@main
+    name: release
+    uses: guilhermelinosp/templates/.github/workflows/release.yml@9fe39322263723d320cdce780f00d5926059798a # main
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
